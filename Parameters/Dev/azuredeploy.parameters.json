@@ -6,7 +6,7 @@
       "value": "wusa"
     },
     "storageSKU": {
-      "value": "standardLRS"
+      "value": "Standard_LRS"
     }
   }
 }
