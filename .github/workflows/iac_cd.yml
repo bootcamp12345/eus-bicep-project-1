@@ -1,0 +1,51 @@
+on:
+  push:
+    branches: [main]
+name: Bicep_Deploy
+
+jobs:
+  build-and-deploy-dev:
+    runs-on: ubuntu-latest
+    steps:
+
+      # Checkout code
+    - uses: actions/checkout@main
+
+      # Log into Azure
+    - uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      # Test Deployment Bicep file
+    - name: Test Dev Deployment
+      uses: azure/arm-deploy@v1
+      with:
+        subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
+        resourceGroupName: ${{ secrets.AZURE_RG }}
+        template: ./main.bicep
+        #parameters: 'storagePrefix=mystore storageSKU=Standard_LRS'
+        parameters: ./Parameters/Dev/dev.azuredeploy.parameters.json
+        failOnStdErr: false
+  build-and-deploy-prd:
+    runs-on: ubuntu-latest
+    steps:
+
+        # Checkout code
+    - uses: actions/checkout@main
+
+        # Log into Azure
+    - uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+        # Test Deployment Bicep file
+    - name: Test Dev Deployment
+      uses: azure/arm-deploy@v1
+      with:
+        subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
+        resourceGroupName: ${{ secrets.AZURE_RG }}
+        template: ./main.bicep
+        #parameters: 'storagePrefix=mystore storageSKU=Standard_LRS'
+        parameters: ./Parameters/Prd/prd.azuredeploy.parameters.json
+        failOnStdErr: false
+      

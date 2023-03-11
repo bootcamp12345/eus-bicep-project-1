@@ -1,4 +1,6 @@
-on: [push]
+on:
+  pull_request:
+    branches: [main]
 name: Azure ARM
 jobs:
   build-and-deploy:
@@ -20,7 +22,6 @@ jobs:
         subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
         resourceGroupName: ${{ secrets.AZURE_RG }}
         template: ./main.bicep
-        #parameters: 'storagePrefix=mystore storageSKU=Standard_LRS'
         parameters: ./Parameters/Dev/azuredeploy.parameters.json
         failOnStdErr: false
         additionalArguments: "--what-if"
