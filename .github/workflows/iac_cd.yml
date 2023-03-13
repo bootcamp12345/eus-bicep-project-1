@@ -8,15 +8,12 @@ jobs:
     runs-on: ubuntu-latest
     environment: dev
     steps:
-
       # Checkout code
     - uses: actions/checkout@main
-
       # Log into Azure
     - uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
-
       # Test Deployment Bicep file
     - name: Dev Deployment
       uses: azure/arm-deploy@v1
@@ -32,21 +29,18 @@ jobs:
     environment: prd
     needs: build-and-deploy-dev
     steps:
-
         # Checkout code
     - uses: actions/checkout@main
-
         # Log into Azure
     - uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
-
         # Test Deployment Bicep file
     - name: Prd Deployment
       uses: azure/arm-deploy@v1      
       with:
-        subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
-        resourceGroupName: ${{ secrets.AZURE_RG }}
+        subscriptionId: ${{ vars.AZURE_SUBSCRIPTION }}
+        resourceGroupName: ${{ vars.AZURE_RG }}
         template: ./main.bicep
         #parameters: 'storagePrefix=mystore storageSKU=Standard_LRS'
         parameters: ./Parameters/Prd/prd.azuredeploy.parameters.json
