@@ -21,8 +21,8 @@ jobs:
     - name: Test Dev Deployment
       uses: azure/arm-deploy@v1
       with:
-        subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
-        resourceGroupName: ${{ secrets.AZURE_RG }}
+        subscriptionId: ${{ var.AZURE_SUBSCRIPTION }}
+        resourceGroupName: ${{ var.AZURE_RG }}
         template: ./main.bicep
         parameters: ./Parameters/Dev/dev.azuredeploy.parameters.json
         failOnStdErr: false
