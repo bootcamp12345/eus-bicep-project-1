@@ -4,9 +4,9 @@ on:
     branches: [main]
 name: Bicep plan
 jobs:
-  build-and-plan:
-    environment: dev
+  build-and-plan:    
     runs-on: ubuntu-latest
+    environment: dev
     steps:
 
       # Checkout code

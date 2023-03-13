@@ -18,7 +18,7 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       # Test Deployment Bicep file
-    - name: Test Dev Deployment
+    - name: Dev Deployment
       uses: azure/arm-deploy@v1
       with:
         subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
@@ -30,6 +30,7 @@ jobs:
   build-and-deploy-prd:
     runs-on: ubuntu-latest
     environment: prd
+    needs: build-and-deploy-dev
     steps:
 
         # Checkout code
@@ -41,7 +42,7 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
         # Test Deployment Bicep file
-    - name: Test Dev Deployment
+    - name: Prd Deployment
       uses: azure/arm-deploy@v1      
       with:
         subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
