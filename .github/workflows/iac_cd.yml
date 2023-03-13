@@ -6,6 +6,7 @@ name: Bicep_Deploy
 jobs:
   build-and-deploy-dev:
     runs-on: ubuntu-latest
+    environment: dev
     steps:
 
       # Checkout code
@@ -28,6 +29,7 @@ jobs:
         failOnStdErr: false
   build-and-deploy-prd:
     runs-on: ubuntu-latest
+    environment: prd
     steps:
 
         # Checkout code
@@ -40,7 +42,7 @@ jobs:
 
         # Test Deployment Bicep file
     - name: Test Dev Deployment
-      uses: azure/arm-deploy@v1
+      uses: azure/arm-deploy@v1      
       with:
         subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
         resourceGroupName: ${{ secrets.AZURE_RG }}
