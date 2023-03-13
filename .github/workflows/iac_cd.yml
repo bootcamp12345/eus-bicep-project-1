@@ -21,8 +21,8 @@ jobs:
     - name: Dev Deployment
       uses: azure/arm-deploy@v1
       with:
-        subscriptionId: ${{ var.AZURE_SUBSCRIPTION }}
-        resourceGroupName: ${{ var.AZURE_RG }}
+        subscriptionId: ${{ vars.AZURE_SUBSCRIPTION }}
+        resourceGroupName: ${{ vars.AZURE_RG }}
         template: ./main.bicep
         #parameters: 'storagePrefix=mystore storageSKU=Standard_LRS'
         parameters: ./Parameters/Dev/dev.azuredeploy.parameters.json
