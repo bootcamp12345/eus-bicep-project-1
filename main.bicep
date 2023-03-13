@@ -3,6 +3,13 @@ param storageAccountName string = 'toylaunch${uniqueString(resourceGroup().id)}'
 param appServiceAppName string = 'toylaunch${uniqueString(resourceGroup().id)}'
 
 @allowed([
+  'dev'
+  'uat'  
+  'prd'
+])
+param environmentName string
+
+@allowed([
   'nonprod'
   'prod'
 ])
@@ -29,6 +36,7 @@ module appService 'modules/appService.bicep' = {
     location: location
     appServiceAppName: appServiceAppName
     environmentType: environmentType
+    environmentName: environmentName
   }
 }
 

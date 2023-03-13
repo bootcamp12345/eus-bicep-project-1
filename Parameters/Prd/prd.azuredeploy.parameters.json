@@ -4,6 +4,9 @@
     "parameters": {
       "environmentType": {
         "value": "prod"
+      },
+      "environmentName": {
+        "value": "prd"
       }
     }
   }
