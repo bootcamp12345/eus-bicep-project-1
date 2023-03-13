@@ -1,7 +1,11 @@
-on: [push]
-name: Azure ARM
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+name: Bicep plan
 jobs:
-  build-and-deploy:
+  build-and-plan:
+    environment: dev
     runs-on: ubuntu-latest
     steps:
 
@@ -13,14 +17,13 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      # Test Deployment Bicep file
+      # Test Deployment Bicep file in DEV
     - name: Test Dev Deployment
       uses: azure/arm-deploy@v1
       with:
         subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
         resourceGroupName: ${{ secrets.AZURE_RG }}
         template: ./main.bicep
-        #parameters: 'storagePrefix=mystore storageSKU=Standard_LRS'
-        parameters: ./Parameters/Dev/azuredeploy.parameters.json
+        parameters: ./Parameters/Dev/dev.azuredeploy.parameters.json
         failOnStdErr: false
         additionalArguments: "--what-if"
