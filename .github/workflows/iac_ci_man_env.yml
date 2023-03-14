@@ -1,0 +1,41 @@
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: Environment to deploy to
+        required: true
+        default: 'dev'
+        type: environment
+      environment_string:
+        description: String Input for Environment
+        required: true
+        default: 'dev'
+        type: string
+name: Bicep plan
+jobs:
+  build-and-plan:    
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+    steps:
+
+      # Checkout code
+    - uses: actions/checkout@main
+
+      # Log into Azure
+    - uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+    - run: |
+        echo "Environment $ENVIRONMENT selected"
+        echo "Running test for environment $ENVIRONMENT_STRING"
+
+      # Test Deployment Bicep file in DEV
+    - name: Test Dev Deployment
+      uses: azure/arm-deploy@v1
+      with:
+        subscriptionId: ${{ vars.AZURE_SUBSCRIPTION }}
+        resourceGroupName: ${{ vars.AZURE_RG }}
+        template: ./main.bicep
+        parameters: ./Parameters/${{ inputs.environment_string }}/${{ inputs.environment_string }}.azuredeploy.parameters.json
+        failOnStdErr: false
+        additionalArguments: "--what-if"
