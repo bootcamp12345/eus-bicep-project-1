@@ -24,6 +24,6 @@ jobs:
         subscriptionId: ${{ vars.AZURE_SUBSCRIPTION }}
         resourceGroupName: ${{ vars.AZURE_RG }}
         template: ./main.bicep
-        parameters: ./Parameters/Dev/dev.azuredeploy.parameters.json
+        parameters: ./Parameters/dev/dev.azuredeploy.parameters.json
         failOnStdErr: false
         additionalArguments: "--what-if"
