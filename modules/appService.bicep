@@ -25,6 +25,10 @@ resource appServiceApp 'Microsoft.Web/sites@2022-03-01' = {
   properties: {
     serverFarmId: appServicePlan.id
     httpsOnly: true
+    siteConfig: {
+      localMySqlEnabled: false
+      netFrameworkVersion: 'v4.6'
+    }
   }
 }
 

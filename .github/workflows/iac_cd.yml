@@ -22,7 +22,7 @@ jobs:
         resourceGroupName: ${{ vars.AZURE_RG }}
         template: ./main.bicep
         #parameters: 'storagePrefix=mystore storageSKU=Standard_LRS'
-        parameters: ./Parameters/Dev/dev.azuredeploy.parameters.json
+        parameters: ./Parameters/dev/dev.azuredeploy.parameters.json
         failOnStdErr: false
   build-and-deploy-prd:
     runs-on: ubuntu-latest
@@ -43,6 +43,6 @@ jobs:
         resourceGroupName: ${{ vars.AZURE_RG }}
         template: ./main.bicep
         #parameters: 'storagePrefix=mystore storageSKU=Standard_LRS'
-        parameters: ./Parameters/Prd/prd.azuredeploy.parameters.json
+        parameters: ./Parameters/prd/prd.azuredeploy.parameters.json
         failOnStdErr: false
       
