@@ -11,7 +11,7 @@ on:
         required: true
         default: 'dev'
         type: string
-name: Bicep plan
+name: Bicep plan manual
 jobs:
   build-and-plan:    
     runs-on: ubuntu-latest

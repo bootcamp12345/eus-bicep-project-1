@@ -11,7 +11,7 @@ on:
         required: true
         default: 'dev'
         type: string
-name: Bicep_Deploy_With_Environment_Selection
+name: Bicep Deploy manual
 
 jobs:
   build-and-deploy:
