@@ -17,7 +17,7 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      # Test Deployment Bicep file in DEV
+      # Test Deployment Bicep file in DEV##
     - name: Test Dev Deployment
       uses: azure/arm-deploy@v1
       with:
